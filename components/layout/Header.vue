@@ -1,5 +1,29 @@
+<script setup>
+import { ref } from 'vue';
+import { useIsMobile } from '~/composables/isMobile.js';
+import LottieAnimation from '../LottieAnimation.vue';
+import cameraLottie from '~/assets/lottie/camera.json';
+
+const titleBox = ref([
+    { name: "门店信息" },
+    { name: "婚纱照" },
+    { name: "化妆服务" },
+    { name: "商务合作" },
+    { name: "价格清单" },
+]);
+
+const isMobileDevice = useIsMobile(); // 使用工具函数
+
+const menuVisible = ref(false); // 控制菜单显示
+
+// 处理标题点击事件
+const handleTitleClick = (title) => {
+    console.log('点击了标题:', title);
+    menuVisible.value = false; // 点击后关闭菜单
+};
+</script>
 <template>
-    <div class="header-box">
+    <div class="header-box" v-if="isMobileDevice !== null">
         <!-- 平板，PC -->
         <div v-if="!isMobileDevice">
             <!-- 平板，PC 显示 -->
@@ -8,7 +32,6 @@
                 {{ i.name }}
             </span>
         </div>
-
         <!-- 移动端 -->
         <div v-else class="w-full flex items-center justify-between px-5">
             <LottieAnimation :animationData="cameraLottie" :loop="true" :autoplay="true" width="40px" height="40px" />
@@ -29,30 +52,7 @@
     </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-import { useIsMobile } from '~/utils/isMobile';
-import LottieAnimation from '../LottieAnimation.vue';
-import cameraLottie from '~/assets/lottie/camera.json';
 
-const titleBox = ref([
-    { name: "门店信息" },
-    { name: "婚礼" },
-    { name: "化妆服务" },
-    { name: "商务合作" },
-    { name: "价格清单" },
-]);
-
-const isMobileDevice = useIsMobile(); // 使用工具函数
-
-const menuVisible = ref(false); // 控制菜单显示
-
-// 处理标题点击事件
-const handleTitleClick = (title) => {
-    console.log('点击了标题:', title);
-    menuVisible.value = false; // 点击后关闭菜单
-};
-</script>
 
 <style scoped lang="scss">
 .header-box {

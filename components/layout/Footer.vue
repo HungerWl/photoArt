@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import {useIsMobile} from '~/utils/isMobile';
+import {useIsMobile} from '~/composables/isMobile.js';
 
 const isMobileDevice = useIsMobile(); // 使用工具函数
 </script>

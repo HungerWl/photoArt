@@ -18,7 +18,7 @@
 ├── stores/              # Pinia 或 Vuex 状态管理文件夹
 │   └── user.js          # 示例用户状态模块
 ├── utils/               # 工具函数库
-├── nuxt.config.ts       # Nuxt 配置文件
+├── nuxt.config.js       # Nuxt 配置文件
 ├── app.vue              # 应用根文件
 └── package.json         # 项目依赖及脚本
 ~~~
