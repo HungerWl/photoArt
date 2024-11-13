@@ -1,32 +1,18 @@
 <template>
   <div>
-    <!-- 加载动画，加载完成后隐藏 -->
-    <!--    <div v-show="isLoading" class="loading-screen">-->
-    <!--      <div class="spinner"></div>-->
-    <!--    </div>-->
-
-    <Header/>    <!-- 引入头部组件 -->
+    <Header /> <!-- 引入头部组件 -->
     <div class="wl-container">
       <main>
-        <slot/>   <!-- 渲染页面内容 -->
+        <slot /> <!-- 渲染页面内容 -->
       </main>
     </div>
-    <Footer/>    <!-- 引入底部组件 -->
+    <Footer /> <!-- 引入底部组件 -->
   </div>
 </template>
 
 <script setup>
-// import {onMounted, ref} from 'vue'
-// 引入头部和底部组件
 import Header from '~/components/layout/Header.vue'
 import Footer from '~/components/layout/Footer.vue'
-
-// const isLoading = ref(true)
-// onMounted(() => {
-//   setTimeout(() => {
-//     isLoading.value = false
-//   }, 500) // 加载动画持续时间，可根据需求调整
-// })
 </script>
 
 <style scoped>

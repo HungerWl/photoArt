@@ -54,8 +54,5 @@ export default defineNuxtConfig({
             },
         },
     },
-    router: {
-        middleware: ['detect-device']  // 将 detect-device 设为全局中间件
-    },
     compatibilityDate: "2024-10-22",
 });
