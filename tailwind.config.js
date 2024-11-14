@@ -12,7 +12,4 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [
-    require('@tailwindcss/aspect-ratio'), // 添加插件
-  ],
 }

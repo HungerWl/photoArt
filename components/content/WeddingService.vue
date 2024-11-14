@@ -1,6 +1,6 @@
 <script lang="js" setup>
 // Import Swiper Vue.js components
-import {Swiper, SwiperSlide} from 'swiper/vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -8,61 +8,120 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 // import required modules
-import {Pagination} from 'swiper/modules';
+import { Pagination } from 'swiper/modules';
 
-import {useIsMobile} from '~/composables/isMobile.js';
+import { useIsMobile } from '~/composables/isMobile.js';
 
 const modules = [Pagination];
 
 const modulesOptions = ref([{
   image: new URL('@/assets/img/2.jpg', import.meta.url).href,
-  // 英文标题
   titleEn: "Light Wedding Dress",
-  // 中文标题
   titleZh: "轻婚纱",
-  // 标语
-  slogan: "轻盈优雅，记录幸福瞬间"
+  slogan: "轻盈优雅，记录幸福瞬间",
+  pcImage: [{
+    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
+    title: "XXXX",
+    describe: "轻盈优雅，记录幸福瞬间",
+  }, {
+    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
+    title: "XXXX",
+    describe: "轻盈优雅，记录幸福瞬间",
+  }, {
+    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
+    title: "XXXX",
+    describe: "轻盈优雅，记录幸福瞬间",
+  }]
+
 },
-  {
-    image: new URL('@/assets/img/3.jpg', import.meta.url).href,
-    titleZh: "证件照",
-    titleEn: "Identification Photo",
-    slogan: "专业拍摄，呈现最美证件照"
-  },
-  {
-    image: new URL('@/assets/img/1.jpg', import.meta.url).href,
-    titleZh: "户外照",
-    titleEn: "Outdoor Photo",
-    slogan: "自然光影，定格户外之美"
-  }
+{
+  image: new URL('@/assets/img/3.jpg', import.meta.url).href,
+  titleZh: "证件照",
+  titleEn: "Identification Photo",
+  slogan: "专业拍摄，呈现最美证件照",
+  pcImage: [{
+    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
+    title: "XXXX",
+    describe: "轻盈优雅，记录幸福瞬间",
+  }, {
+    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
+    title: "XXXX",
+    describe: "轻盈优雅，记录幸福瞬间",
+  }, {
+    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
+    title: "XXXX",
+    describe: "轻盈优雅，记录幸福瞬间",
+  }]
+},
+{
+  image: new URL('@/assets/img/1.jpg', import.meta.url).href,
+  titleZh: "户外照",
+  titleEn: "Outdoor Photo",
+  slogan: "自然光影，定格户外之美",
+  pcImage: [{
+    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
+    title: "XXXX",
+    describe: "轻盈优雅，记录幸福瞬间",
+  }, {
+    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
+    title: "XXXX",
+    describe: "轻盈优雅，记录幸福瞬间",
+  }, {
+    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
+    title: "XXXX",
+    describe: "轻盈优雅，记录幸福瞬间",
+  }]
+}
 ])
 
 const isMobileDevice = useIsMobile(); // 使用工具函数
 </script>
 
 <template>
-  <div class="wedding-box">
-    <swiper
-        :modules="modules"
-        :pagination="{
-        dynamicBullets: true,
-    }"
-        class="pb-8">
+  <div class="wedding-box" v-if="isMobileDevice !== null">
+    <swiper :modules="modules" :pagination="{
+      dynamicBullets: true,
+    }" class="pb-8">
       <swiper-slide v-for="item in modulesOptions" :key="item" class="w-full">
         <!--        平板，pc-->
-        <div v-if="!isMobileDevice"></div>
+        <div v-if="!isMobileDevice" class="w-full flex flex-column items-center py-3">
+          <div class="w-full flex flex-col align-center">
+            <!-- 标题 -->
+            <div class="title font-weight-bold text-[30px] tracking-wider">
+              {{ item.titleZh }}
+            </div>
+            <div class="offcanvas-title font-serif text-[30px] uppercase pb-2">
+              {{ item.titleEn }}
+            </div>
+            <ul class="card-list">
+              <li v-for="node in item.pcImage" :key="node" class="card">
+                <img :src="node.image" alt="" />
+                <h2 class="text-[25px] py-2 offcanvas-title font-serif uppercase">{{ node.title }}</h2>
+                <p class="text-[21px] text-[#515151] pb-4 offcanvas-title font-serif ">{{ node.describe }}</p>
+              </li>
+            </ul>
+            <div class="my-2">
+              <v-btn class="mr-[30px]" size="x-large" prepend-icon="mdi-eye-arrow-right-outline" color="deep-purple-darken-2">
+                查看详情
+              </v-btn>
+              <v-btn size="x-large" prepend-icon=" mdi-account-card-outline" color="deep-purple-darken-2">
+                立即预约
+              </v-btn>
+            </div>
+          </div>
+        </div>
         <!--        手机-->
         <div v-else class="w-full flex flex-column items-center">
-          <div class="title font-weight-bold text-[21px] tracking-wider">{{ item.titleZh }}</div>
-          <div class="offcanvas-title font-serif uppercase pb-2">{{ item.titleEn }}</div>
-          <img :src="item.image" alt="" class="w-auto h-[217px]">
+          <div class="title font-weight-bold text-[21px] tracking-wider">
+            {{ item.titleZh }}
+          </div>
+          <div class="offcanvas-title font-serif uppercase pb-2">
+            {{ item.titleEn }}
+          </div>
+          <img :src="item.image" alt="" class="w-auto h-[217px]" />
           <div class="w-full flex justify-center gap-4 py-4">
-            <v-btn color="indigo-darken-3" variant="flat">
-              查看详情
-            </v-btn>
-            <v-btn color="indigo-darken-3" variant="flat">
-              立即预约
-            </v-btn>
+            <v-btn color="indigo-darken-3" variant="flat"> 查看详情 </v-btn>
+            <v-btn color="indigo-darken-3" variant="flat"> 立即预约 </v-btn>
           </div>
           <div v-html="item.slogan"></div>
         </div>
@@ -85,4 +144,57 @@ const isMobileDevice = useIsMobile(); // 使用工具函数
   color: red; // 悬停时变成红色
 }
 
+/* Lazy Load Styles */
+.card-image {
+  display: block;
+  min-height: 30rem;
+  /* layout hack */
+  background: #fff center center no-repeat;
+  background-size: cover;
+  filter: blur(3px);
+  /* blur the lowres image */
+}
+
+.card-image>img {
+  display: block;
+  width: 100%;
+  opacity: 0;
+  /* visually hide the img element */
+}
+
+.card-image.is-loaded {
+  filter: none;
+  /* remove the blur on fullres image */
+  transition: filter 1s;
+}
+
+.card-list {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.card {
+  display: inline-block;
+  width: 90%;
+  max-width: 25rem;
+  margin: 1rem;
+  font-size: 1rem;
+  text-decoration: none;
+  overflow: hidden;
+  box-shadow: 0 0 3rem -1rem rgba(0, 0, 0, 0.5);
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s;
+}
+
+.card:hover {
+  transform: translateY(-0.5rem) scale(1.0125);
+  box-shadow: 0 0.5em 3rem -1rem rgba(0, 0, 0, 0.5);
+}
+
+.card-description {
+  display: block;
+  padding: 1em 0.5em;
+  color: #515151;
+  text-decoration: none;
+}
 </style>

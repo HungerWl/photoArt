@@ -1,45 +1,20 @@
-import vuetify, {transformAssetUrls} from "vite-plugin-vuetify";
+import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
 export default defineNuxtConfig({
-    build: {
-        transpile: ["vuetify"],
-    },
     app: {
         head: {
             title: "照相馆门户网站",
             meta: [
-                {name: "description", content: "照相馆门户网站，展示专业摄影服务"},
+                { name: "description", content: "专业摄影服务展示" },
+                { name: "viewport", content: "width=device-width, initial-scale=1" },
+                { charset: "utf-8" }
+            ],
+            link: [
+                { rel: "icon", type: "image/png", href: "/favicon.ico" }, // 增加 favicon
             ],
         },
     },
 
-    devtools: {enabled: false},
-
-    typescript: {
-        shim: false, // 修改 shim 配置
-    },
-
-    css: [
-        "~/assets/styles/tailwind.css",
-        "bootstrap-icons/font/bootstrap-icons.css",
-        "~/assets/styles/toolStyle.scss",
-        "~/assets/styles/main.css",
-    ],
-
-    postcss: {
-        plugins: {
-            tailwindcss: {},
-            autoprefixer: {},
-        },
-    },
-    modules: [
-        (_options, nuxt) => {
-            nuxt.hooks.hook("vite:extendConfig", (config) => {
-                // @ts-expect-error
-                config.plugins.push(vuetify({autoImport: true}));
-            });
-        },
-    ],
     vite: {
         vue: {
             template: {
@@ -49,10 +24,40 @@ export default defineNuxtConfig({
         css: {
             preprocessorOptions: {
                 scss: {
-                    api: "modern-compiler",
+                    silenceDeprecations: ['legacy-js-api'],
                 },
             },
         },
     },
-    compatibilityDate: "2024-10-22",
+
+    css: [
+        "~/assets/styles/tailwind.css",
+        "~/assets/styles/main.css",
+    ],
+
+    build: {
+        transpile: ["vuetify"],
+    },
+
+    devtools: { enabled: false },
+
+    typescript: {
+        shim: false,
+    },
+
+    postcss: {
+        plugins: {
+            tailwindcss: {},
+            autoprefixer: {},
+        },
+    },
+
+    modules: [
+        // Vuetify configuration in Nuxt 3
+        (_options, nuxt) => {
+            nuxt.hooks.hook("vite:extendConfig", (config) => {
+                config.plugins.push(vuetify({ autoImport: true }));
+            });
+        },
+    ],
 });

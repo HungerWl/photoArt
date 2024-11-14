@@ -1,6 +1,6 @@
 <script lang="js" setup>
-import {useIsMobile} from '~/composables/isMobile.js';
-import {ref} from "vue";
+import { useIsMobile } from '~/composables/isMobile.js';
+import { ref } from "vue";
 
 const isMobileDevice = useIsMobile(); // 使用工具函数
 
@@ -58,24 +58,18 @@ const lineOpitons = ref([
 </script>
 
 <template>
-  <div class="service-process py-[10px]">
+  <div v-if="isMobileDevice !== null" class="service-process py-[10px]">
     <!--    移动端-->
     <div v-if="isMobileDevice">
-      <div class="text-center text-[19px] title-container">
-        <i class="bi bi-calendar2-heart mr-2 text-[red] icon"></i>
+      <div class="text-center text-[19px]">
+        <i class="mdi mdi-orbit mr-2 text-[19px] icon"></i>
         <span class="title-text">服务流程</span>
-        <div class="w-full overflow-x-auto mt-[5px]">
+        <!-- <div class="w-full overflow-x-auto mt-[5px]">
           <v-timeline direction="horizontal">
-            <v-timeline-item
-                v-for="item in lineOpitons"
-                :key="item.text"
-                :dot-color="item.background"
-                :icon="item.icon"
-                :fill-dot="true"
-                size="small"
-            >
+            <v-timeline-item v-for="item in lineOpitons" :key="item.text" :dot-color="item.background" :icon="item.icon"
+              :fill-dot="true" size="small">
               <div :style="{ color: item.color, background: item.background }"
-                   class="w-[200px] border border-gray-200 flex flex-col text-left px-4 py-3 rounded-md shadow-lg">
+                class="w-[200px] border border-gray-200 flex flex-col text-left px-4 py-3 rounded-md shadow-lg">
                 <div class="font-semibold text-lg leading-snug">
                   {{ item.text }}
                 </div>
@@ -84,20 +78,17 @@ const lineOpitons = ref([
                 </div>
               </div>
               <template v-slot:opposite>
-                <v-img
-                    :width="120"
-                    :height="80"
-                    aspect-ratio="16/9"
-                    cover
-                    src=""
-                ></v-img>
+                <v-img :width="120" :height="80" aspect-ratio="16/9" cover src=""></v-img>
               </template>
-            </v-timeline-item>
-          </v-timeline>
-        </div>
+</v-timeline-item>
+</v-timeline>
+</div> -->
       </div>
     </div>
     <!--    PC端,平板-->
+    <div v-else>
+      111
+    </div>
   </div>
 </template>
 
@@ -115,6 +106,5 @@ const lineOpitons = ref([
 /* 图标颜色渐变 */
 .icon {
   color: #ff7e5f;
-  animation: iconColorChange 1s ease-in-out forwards, bounce 1s ease infinite alternate;
 }
 </style>

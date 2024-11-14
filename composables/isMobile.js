@@ -1,7 +1,8 @@
-import {onMounted, onUnmounted, ref} from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 export function useIsMobile() {
-    const isMobileDevice = ref(false);
+    const isMobileDevice = ref(null);
+
     let resizeObserver;
 
     function updateIsMobileDevice() {
@@ -12,7 +13,6 @@ export function useIsMobile() {
         resizeObserver = new ResizeObserver(updateIsMobileDevice);
         resizeObserver.observe(document.body); // 观察 body 尺寸变化
         updateIsMobileDevice(); // 初始检查
-        console.log()
     });
 
     onUnmounted(() => {
