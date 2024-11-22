@@ -14,6 +14,30 @@ export default defineNuxtConfig({
             ],
         },
     },
+    runtimeConfig: {
+        public: {
+            apiBase: 'http://192.168.3.125:8000', // 公开的 API 基础地址
+        },
+    },
+    css: [
+        "~/assets/styles/tailwind.css",
+        "~/assets/styles/main.css",
+        "~/assets/styles/global.css",
+    ],
+
+    build: {
+        transpile: ["vuetify"],
+    },
+
+
+    modules: [
+        // Vuetify configuration in Nuxt 3
+        (_options, nuxt) => {
+            nuxt.hooks.hook("vite:extendConfig", (config) => {
+                config.plugins.push(vuetify({ autoImport: true }));
+            });
+        },
+    ],
 
     vite: {
         vue: {
@@ -30,16 +54,8 @@ export default defineNuxtConfig({
         },
     },
 
-    css: [
-        "~/assets/styles/tailwind.css",
-        "~/assets/styles/main.css",
-    ],
 
-    build: {
-        transpile: ["vuetify"],
-    },
-
-    devtools: { enabled: false },
+    devtools: { enabled: true },
 
     typescript: {
         shim: false,
@@ -51,13 +67,4 @@ export default defineNuxtConfig({
             autoprefixer: {},
         },
     },
-
-    modules: [
-        // Vuetify configuration in Nuxt 3
-        (_options, nuxt) => {
-            nuxt.hooks.hook("vite:extendConfig", (config) => {
-                config.plugins.push(vuetify({ autoImport: true }));
-            });
-        },
-    ],
 });

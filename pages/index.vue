@@ -6,6 +6,8 @@
     <Introduction />
     <WeddingService />
     <ServiceProcess />
+    <Address />
+    <Footer />
   </div>
 </template>
 
@@ -16,9 +18,10 @@ import Logo from "~/components/content/Logo.vue";
 import Introduction from "~/components/content/Introduction.vue";
 import WeddingService from "~/components/content/WeddingService.vue";
 import ServiceProcess from "~/components/content/ServiceProcess.vue";
+import Address from "~/components/content/Address.vue";
+import Footer from "~/layouts/Footer.vue";
 
-onMounted(() => {});
+onMounted(() => { });
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

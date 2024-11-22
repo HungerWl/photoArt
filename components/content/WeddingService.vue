@@ -14,65 +14,11 @@ import { useIsMobile } from '~/composables/isMobile.js';
 
 const modules = [Pagination];
 
-const modulesOptions = ref([{
-  image: new URL('@/assets/img/2.jpg', import.meta.url).href,
-  titleEn: "Light Wedding Dress",
-  titleZh: "轻婚纱",
-  slogan: "轻盈优雅，记录幸福瞬间",
-  pcImage: [{
-    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
-    title: "XXXX",
-    describe: "轻盈优雅，记录幸福瞬间",
-  }, {
-    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
-    title: "XXXX",
-    describe: "轻盈优雅，记录幸福瞬间",
-  }, {
-    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
-    title: "XXXX",
-    describe: "轻盈优雅，记录幸福瞬间",
-  }]
+const modulesOptions = ref([])
+const { data } = await useFetch(`${useRuntimeConfig().public.apiBase}/wedding-services`);
 
-},
-{
-  image: new URL('@/assets/img/3.jpg', import.meta.url).href,
-  titleZh: "证件照",
-  titleEn: "Identification Photo",
-  slogan: "专业拍摄，呈现最美证件照",
-  pcImage: [{
-    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
-    title: "XXXX",
-    describe: "轻盈优雅，记录幸福瞬间",
-  }, {
-    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
-    title: "XXXX",
-    describe: "轻盈优雅，记录幸福瞬间",
-  }, {
-    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
-    title: "XXXX",
-    describe: "轻盈优雅，记录幸福瞬间",
-  }]
-},
-{
-  image: new URL('@/assets/img/1.jpg', import.meta.url).href,
-  titleZh: "户外照",
-  titleEn: "Outdoor Photo",
-  slogan: "自然光影，定格户外之美",
-  pcImage: [{
-    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
-    title: "XXXX",
-    describe: "轻盈优雅，记录幸福瞬间",
-  }, {
-    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
-    title: "XXXX",
-    describe: "轻盈优雅，记录幸福瞬间",
-  }, {
-    image: new URL('@/assets/img/2.jpg', import.meta.url).href,
-    title: "XXXX",
-    describe: "轻盈优雅，记录幸福瞬间",
-  }]
-}
-])
+modulesOptions.value = data.value.results
+
 
 const isMobileDevice = useIsMobile(); // 使用工具函数
 </script>
@@ -88,20 +34,21 @@ const isMobileDevice = useIsMobile(); // 使用工具函数
           <div class="w-full flex flex-col align-center">
             <!-- 标题 -->
             <div class="title font-weight-bold text-[30px] tracking-wider">
-              {{ item.titleZh }}
+              {{ item.title_zh }}
             </div>
             <div class="offcanvas-title font-serif text-[30px] uppercase pb-2">
-              {{ item.titleEn }}
+              {{ item.title_en }}
             </div>
             <ul class="card-list">
-              <li v-for="node in item.pcImage" :key="node" class="card">
-                <img :src="node.image" alt="" />
-                <h2 class="text-[25px] py-2 offcanvas-title font-serif uppercase">{{ node.title }}</h2>
-                <p class="text-[21px] text-[#515151] pb-4 offcanvas-title font-serif ">{{ node.describe }}</p>
+              <li v-for="node in item.pc_images" :key="node" class="card">
+                <img :src="node.image" alt="" class="w-full h-[400px] md:h-[280px] object-cover" />
+                <h2 class="text-[23px] py-2 offcanvas-title font-serif uppercase">{{ node.title }}</h2>
+                <p class="px-2 text-[19px] text-[#515151] pb-4 offcanvas-title font-serif">{{ node.describe }}</p>
               </li>
             </ul>
             <div class="my-2">
-              <v-btn class="mr-[30px]" size="x-large" prepend-icon="mdi-eye-arrow-right-outline" color="deep-purple-darken-2">
+              <v-btn class="mr-[30px]" size="x-large" prepend-icon="mdi-eye-arrow-right-outline"
+                color="deep-purple-darken-2">
                 查看详情
               </v-btn>
               <v-btn size="x-large" prepend-icon=" mdi-account-card-outline" color="deep-purple-darken-2">
@@ -113,10 +60,10 @@ const isMobileDevice = useIsMobile(); // 使用工具函数
         <!--        手机-->
         <div v-else class="w-full flex flex-column items-center">
           <div class="title font-weight-bold text-[21px] tracking-wider">
-            {{ item.titleZh }}
+            {{ item.title_zh }}
           </div>
           <div class="offcanvas-title font-serif uppercase pb-2">
-            {{ item.titleEn }}
+            {{ item.title_en }}
           </div>
           <img :src="item.image" alt="" class="w-auto h-[217px]" />
           <div class="w-full flex justify-center gap-4 py-4">
@@ -176,7 +123,7 @@ const isMobileDevice = useIsMobile(); // 使用工具函数
 
 .card {
   display: inline-block;
-  width: 90%;
+  width: 100%;
   max-width: 25rem;
   margin: 1rem;
   font-size: 1rem;

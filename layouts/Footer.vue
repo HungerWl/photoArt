@@ -1,5 +1,5 @@
 <template>
-  i bi-sina-weibo<div class='footer-box w-full bg-black text-white text-center py-4'>
+  <div v-if="isMobileDevice !== null" class='footer-box w-full bg-black text-white text-center py-4'>
     <!-- 平板，PC -->
     <div v-if="!isMobileDevice">
       <div class="h-[400px]"></div>
@@ -10,9 +10,9 @@
         <span class="logo-text text-[30px] font-weight-bold text-uppercase">photography Studio</span>
         <span class="logo-text text-[21px]">你的拍摄灵感，从这里开始 !</span>
         <div class="icon-box flex justify-center mt-[10px]">
-          <i class="bi bi-wechat mx-5 text-[21px]"></i>
-          <i class="bi bi-whatsapp mx-5 text-[21px]"></i>
-          <i class="b mx-5 text-[21px]"></i>
+          <i class="mdi mdi-wechat mx-5 text-[21px]"></i>
+          <i class="mdi mdi-phone-forward mx-5 text-[21px]"></i>
+          <i class="mdi mdi-sina-weibo mx-5 text-[21px]"></i>
         </div>
       </div>
     </div>
@@ -20,11 +20,9 @@
 </template>
 
 <script setup>
-import {useIsMobile} from '~/composables/isMobile.js';
+import { useIsMobile } from '~/composables/isMobile.js';
 
 const isMobileDevice = useIsMobile(); // 使用工具函数
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

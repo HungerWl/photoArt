@@ -3,55 +3,71 @@ import { ref } from 'vue';
 import { useIsMobile } from '~/composables/isMobile.js';
 import LottieAnimation from '~/components/LottieAnimation.vue';
 import cameraLottie from '~/assets/lottie/camera.json';
-
 const titleBox = ref([
-    { name: "门店信息" },
-    { name: "婚纱照" },
-    { name: "化妆服务" },
-    { name: "商务合作" },
-    { name: "价格清单" },
+    "门店信息",
+    "婚纱照",
+    "化妆服务",
+    "商务合作",
+    "价格清单"
 ]);
 
-const isMobileDevice = useIsMobile(); // 使用工具函数
-
-const menuVisible = ref(false); // 控制菜单显示
+const isMobileDevice = useIsMobile(); // 检测设备类型
 
 // 处理标题点击事件
 const handleTitleClick = (title) => {
-    console.log('点击了标题:', title);
-    menuVisible.value = false; // 点击后关闭菜单
+    switch (title) {
+        case "门店信息":
+            openModal(ModalDialog, '动态标题');
+            break;
+
+        case "婚纱照":
+
+            break;
+        case "化妆服务":
+
+            break;
+        case "商务合作":
+
+            break;
+        case "价格清单":
+            break;
+    }
 };
+
 </script>
+
+
 <template>
-    <div class="header-box" v-if="isMobileDevice !== null">
-        <!-- 平板，PC -->
-        <div v-show="!isMobileDevice">
-            <!-- 平板，PC 显示 -->
-            <span v-for="i in titleBox" :key="i.name"
-                class="mr-5 sm:mr-4 md:mr-8 lg:mr-10 text-sm sm:text-base md:text-lg lg:text-xl cursor-pointer transition-colors duration-300 ease-in-out hover:text-[#2995f9] relative">
-                {{ i.name }}
+    <div v-if="isMobileDevice !== null" class="header-box">
+        <!-- 平板/PC -->
+        <template v-if="!isMobileDevice">
+            <span v-for="name in titleBox" :key="name" class="header-item" @click="handleTitleClick(name)">
+                {{ name }}
             </span>
-        </div>
+            <div>
+            </div>
+        </template>
+
         <!-- 移动端 -->
-        <div v-show="isMobileDevice" class="w-full flex items-center justify-between px-5">
-            <LottieAnimation :animationData="cameraLottie" :loop="true" :autoplay="true" width="40px" height="40px" />
-            <h5 class="offcanvas-title font-serif uppercase tracking-widest text-[15px]" id="offcanvasRightLabel">
-                Photography_Studio
-            </h5>
-            <v-menu>
-                <template v-slot:activator="{ props }">
-                    <i v-bind="props" class="mdi mdi-menu text-[31px]"></i>
-                </template>
-                <v-list>
-                    <v-list-item v-for="(item, index) in titleBox" :key="index" :value="item.name">
-                        <v-list-item-title @click="handleTitleClick">{{ item.name }}</v-list-item-title>
-                    </v-list-item>
-                </v-list>
-            </v-menu>
-        </div>
+        <template v-else>
+            <div class="mobile-header">
+                <LottieAnimation :animationData="cameraLottie" :loop="true" :autoplay="true" width="40px"
+                    height="40px" />
+                <h5 class="mobile-title">Photography_Studio</h5>
+                <v-menu>
+                    <template #activator="{ props }">
+                        <i v-bind="props" class="mdi mdi-menu text-[31px]"></i>
+                    </template>
+                    <v-list>
+                        <v-list-item v-for="name in titleBox" :key="name" @click="handleTitleClick(name)">
+                            <v-list-item-title>{{ name }}</v-list-item-title>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
+            </div>
+        </template>
     </div>
 </template>
-
 
 
 <style scoped lang="scss">
@@ -63,5 +79,32 @@ const handleTitleClick = (title) => {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.header-item {
+    margin-right: 1.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+        color: #2995f9;
+    }
+}
+
+/* 使用 SCSS 嵌套结构优化样式 */
+.mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 1.25rem;
+
+    .mobile-title {
+        font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-size: 15px;
+    }
 }
 </style>
