@@ -3,7 +3,7 @@ import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 export default defineNuxtConfig({
     app: {
         head: {
-            baseURL: "/",
+            baseURL: "/photoArt/",
             title: "照相馆门户网站",
             meta: [
                 { name: "description", content: "专业摄影服务展示" },
@@ -81,4 +81,8 @@ export default defineNuxtConfig({
     },
 
     compatibilityDate: "2024-12-03",
+    // 配置 router.base 以处理 GitHub Pages 下的子路径
+    router: {
+        base: '/photoArt/',  // 设置路由的基础路径
+    },
 });
