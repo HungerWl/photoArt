@@ -3,6 +3,7 @@ import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 export default defineNuxtConfig({
     app: {
         head: {
+            baseURL: "/",
             title: "照相馆门户网站",
             meta: [
                 { name: "description", content: "专业摄影服务展示" },
@@ -14,11 +15,20 @@ export default defineNuxtConfig({
             ],
         },
     },
+
+    loadingIndicator: 'circle',
+
+    errorPage: {
+        statusCode: 500,
+        component: '~/pages/error.vue'
+    },
+
     runtimeConfig: {
         public: {
-            apiBase: 'http://192.168.3.125:8000', // 公开的 API 基础地址
+            apiBase: 'http://www.ecmanage.cn:8000', // 公开的 API 基础地址
         },
     },
+
     css: [
         "~/assets/styles/tailwind.css",
         "~/assets/styles/main.css",
@@ -29,20 +39,12 @@ export default defineNuxtConfig({
         transpile: ["vuetify"],
     },
 
-
-    modules: [
-        // Vuetify configuration in Nuxt 3
-        (_options, nuxt) => {
-            nuxt.hooks.hook("vite:extendConfig", (config) => {
-                config.plugins.push(vuetify({ autoImport: true }));
-            });
-        },
-    ],
+    modules: ["@nuxt/image"],
 
     vite: {
         vue: {
             template: {
-                transformAssetUrls,
+                transformAssetUrls: vuetify.transformAssetUrls, // 正确处理 Vuetify 组件的资源路径
             },
         },
         css: {
@@ -54,6 +56,16 @@ export default defineNuxtConfig({
         },
     },
 
+    hooks: {
+        "vite:extendConfig"(config) {
+            config.plugins = config.plugins || [];
+            config.plugins.push(
+                vuetify({
+                    autoImport: true, // 自动导入 Vuetify 组件
+                })
+            );
+        },
+    },
 
     devtools: { enabled: true },
 
@@ -67,4 +79,6 @@ export default defineNuxtConfig({
             autoprefixer: {},
         },
     },
+
+    compatibilityDate: "2024-12-03",
 });

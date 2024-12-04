@@ -27,6 +27,8 @@
 import { useIsMobile } from "~/composables/isMobile.js";
 
 const isMobileDevice = useIsMobile();
+
+
 </script>
 <style lang="scss" scoped>
 .logo-box {
@@ -61,7 +63,7 @@ const isMobileDevice = useIsMobile();
   .title-icon {
     font-size: 24px;
 
-    > i {
+    >i {
       margin-right: 20px;
       cursor: pointer;
       // 鼠标悬停时显示手型

@@ -19,6 +19,10 @@ const { data } = await useFetch(`${useRuntimeConfig().public.apiBase}/wedding-se
 
 modulesOptions.value = data.value.results
 
+const callPhone = () => {
+  window.location.href = `tel:${18936864723}`;
+}
+
 
 const isMobileDevice = useIsMobile(); // 使用工具函数
 </script>
@@ -48,10 +52,11 @@ const isMobileDevice = useIsMobile(); // 使用工具函数
             </ul>
             <div class="my-2">
               <v-btn class="mr-[30px]" size="x-large" prepend-icon="mdi-eye-arrow-right-outline"
-                color="deep-purple-darken-2">
+                color="deep-purple-darken-2" @click="$router.push(`/detail/${item.id}`)">
                 查看详情
               </v-btn>
-              <v-btn size="x-large" prepend-icon=" mdi-account-card-outline" color="deep-purple-darken-2">
+              <v-btn size="x-large" prepend-icon=" mdi-account-card-outline" color="deep-purple-darken-2"
+                @click="callPhone">
                 立即预约
               </v-btn>
             </div>
@@ -67,8 +72,8 @@ const isMobileDevice = useIsMobile(); // 使用工具函数
           </div>
           <img :src="item.image" alt="" class="w-auto h-[217px]" />
           <div class="w-full flex justify-center gap-4 py-4">
-            <v-btn color="indigo-darken-3" variant="flat"> 查看详情 </v-btn>
-            <v-btn color="indigo-darken-3" variant="flat"> 立即预约 </v-btn>
+            <v-btn color="indigo-darken-3" variant="flat" @click="$router.push(`/detail/${item.id}`)"> 查看详情 </v-btn>
+            <v-btn color="indigo-darken-3" variant="flat" @click="callPhone"> 立即预约 </v-btn>
           </div>
           <div v-html="item.slogan"></div>
         </div>

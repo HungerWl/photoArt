@@ -77,6 +77,7 @@ const isMobileDevice = useIsMobile();
 const letters = "OPEN CLOSE".split(""); // 字符串拆分为字母数组
 const colors = ["red-500", "blue-500", "green-500", "yellow-500", "purple-500", "pink-500", "cyan-500"];
 const { data } = await useFetch(`${useRuntimeConfig().public.apiBase}/camera-address/1`);
+
 const cameraAddress = ref(data.value || {});
 </script>
 

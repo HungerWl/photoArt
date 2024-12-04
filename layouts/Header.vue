@@ -47,13 +47,15 @@ const handleTitleClick = (title) => {
             <div>
             </div>
         </template>
-
+        
         <!-- 移动端 -->
         <template v-else>
             <div class="mobile-header">
                 <LottieAnimation :animationData="cameraLottie" :loop="true" :autoplay="true" width="40px"
                     height="40px" />
-                <h5 class="mobile-title">Photography_Studio</h5>
+                <h5 class="mobile-title">
+                    <span>Photography_Studio</span>
+                </h5>
                 <v-menu>
                     <template #activator="{ props }">
                         <i v-bind="props" class="mdi mdi-menu text-[31px]"></i>
@@ -104,7 +106,7 @@ const handleTitleClick = (title) => {
         font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        font-size: 15px;
+        font-size: 14px;
     }
 }
 </style>
