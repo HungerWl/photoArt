@@ -1,0 +1,1 @@
+import{f as s,o as t,M as i}from"./-N-Ruka0.js";function u(){const o=s(null);let e;function n(){o.value=document.body.clientWidth<=767}return t(()=>{e=new ResizeObserver(n),e.observe(document.body),n()}),i(()=>{e.disconnect()}),o}export{u};

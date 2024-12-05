@@ -1,0 +1,1 @@
+import{_ as o,t as s,v as t,x as e}from"./-N-Ruka0.js";const a={},n={class:"error-page"};function c(_,r){return s(),t("div",n,r[0]||(r[0]=[e("div",{class:"error-container"},[e("h1",null,"500 - 服务器内部错误"),e("p",null,"抱歉，服务器遇到了一些问题。请关闭稍后再试。")],-1)]))}const d=o(a,[["render",c],["__scopeId","data-v-b4713e45"]]);export{d as default};
